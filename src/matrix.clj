@@ -35,3 +35,9 @@
       )
     )
   )
+
+(defn xy [x y]
+  (reduce #(conj %1 [(nth x %2) (nth y %2)])
+          []
+          (range (count x)))
+  )
