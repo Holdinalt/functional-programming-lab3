@@ -1,7 +1,6 @@
 {
- :require [clojure.math :as math]
  :deps {
-        org.clojure/clojure {:mvn/version "1.10.3"}
+        org.clojure/clojure {:mvn/version "1.11.1"}
         org.clojure/test.check {:mvn/version "0.10.0"}
         }
  :aliases {:test {:extra-paths ["test"]

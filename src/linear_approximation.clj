@@ -1,6 +1,5 @@
 (ns linear-approximation
-  (:require [clojure.math :as math])
-  )
+  (:require [clojure.math :as math]))
 
 ;Name = 'Линейная аппроксимация'
 ;func = 'fi = a*x + b'
@@ -13,8 +12,7 @@
 
 (defn execute
   [points out-points]
-  (let [
-        len (count points)
+  (let [len (count points)
         SX (reduce #(+ (first %2) %1) 0 points)
         SXX (reduce #(+ (math/pow (first %2) 2) %1) 0 points)
         SY (reduce #(+ (second %2) %1) 0 points)
@@ -31,12 +29,8 @@
         ;RX (reduce #(+ %1 (math/pow (- (first %2) meanX) 2)) 0 points)
         ;RY (reduce #(+ %1 (math/pow (- (second %2) meanY) 2)) 0 points)
 
-        result {
-                :a a
+        result {:a a
                 :b b
-                :out (reduce #(conj %1 (+ (* %2 a) b)) [] out-points)
-                }
-        ]
-    result
-    )
-  )
+                :out (reduce #(conj %1 (+ (* %2 a) b)) [] out-points)}]
+
+    result))
