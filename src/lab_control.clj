@@ -14,15 +14,18 @@
 
 (defn calc [dots start end step method]
   (let [
-        out-points (range start end step)
-        helo (println method)
+        out-points (map #(/ %1 10) (range (* start 10) (* end 10) (* step 10)))
+        ;helo (println method dots out-points)
+        ;met (println "method" method)
+        ;met (println "dots" dots)
+        ;met (println "out-start" out-points)
+        ;met (println "start" start)
         result (calcByMethod method dots out-points)
         ]
-    (println start end step)
-    (println dots out-points)
-    (println result)
 
-    (map #(println (nth out-points %1) (nth (:out result) %1)) (range (count out-points)))
+    (doseq [i (range (count out-points))]
+      (println (nth out-points i) (nth (:out result) i))
+      )
     )
   )
 
@@ -51,13 +54,17 @@
                             now-dots-x-sum (reduce #(+ %1 (first %2)) 0 now-dots)
                             mean (/ now-dots-x-sum window)
                             ;hi (println now-dots now-dots-x-sum)
-                            hello (println mean last-count-x step)
+                            ;hello (println mean last-count-x step)
+                            ;h23 (println methods)
                             end (find-end mean last-count-x step)
+                            end (if (< end (first (second now-dots))) (first (second now-dots)) end)
                             ]
-                        (do
-                          (map #(lab-control/calc now-dots last-count-x end step %1) methods)
-                          (recur now-dots window end step methods)
+
+                        (doseq [method methods]
+                          (lab-control/calc now-dots last-count-x end step method)
                           )
+
+                        (recur now-dots window end step methods)
                         )
                 )
               )
@@ -65,16 +72,22 @@
     )
   )
 
-(defn execute []
-  ;[methods startStop step]
-  (let [methods ["linearin"]
-        step 0.2
-        window 2
+
+(defn execute [args]
+  (let [trueArgs (first args)
+        step (read-string (first trueArgs) )
+        window (read-string(second trueArgs))
+        methods (vec (drop 2 trueArgs))
         ]
+    ;(println step window methods)
     (go [] window nil step methods)
     )
   )
 
-(execute)
+(execute [*command-line-args*])
+
+;(defn -main [& args]
+;  (execute [args])
+;  )
 
 
