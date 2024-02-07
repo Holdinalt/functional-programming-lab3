@@ -11,6 +11,10 @@
 ;   :out
 ; }
 
+(defn calc [A B C X]
+  (+ C (* B X) (* A (math/pow X 2)))
+  )
+
 (defn execute
   [points out-points]
   (let [N (count points)
@@ -40,12 +44,24 @@
         C (/ D1 D)
         B (/ D2 D)
         A (/ D3 D)
+        E (reduce
+            #(conj %1 (- (calc A B C (first %2)) (second %2)))
+            []
+            points
+            )
+        S (reduce
+            #(+ %1 (math/pow %2 2))
+            0
+            E
+            )
         result {:a A
                 :b B
                 :c C
                 :out (reduce
-                      #(conj %1 (+ C (* B %2) (* A (math/pow %2 2))))
+                      #(conj %1 (calc A B C %2))
                       []
-                      out-points)}]
+                      out-points)
+                :s S
+                }]
 
     result))

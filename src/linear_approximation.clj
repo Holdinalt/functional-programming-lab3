@@ -10,6 +10,10 @@
 ;   :out
 ; }
 
+(defn calc [A B X]
+  (+ (* X A) B)
+  )
+
 (defn execute
   [points out-points]
   (let [len (count points)
@@ -22,15 +26,20 @@
         D2 (- (* SXX SY) (* SX SXY))
         a (/ D1 D)
         b (/ D2 D)
-
-        ;meanX (/ SX len)
-        ;meanY (/ SY len)
-        ;RXY (reduce #(+ %2 (* (- (first %2) meanX) (- (second %2) meanY))) 0 points)
-        ;RX (reduce #(+ %1 (math/pow (- (first %2) meanX) 2)) 0 points)
-        ;RY (reduce #(+ %1 (math/pow (- (second %2) meanY) 2)) 0 points)
+        E (reduce
+            #(conj %1 (- (calc a b (first %2)) (second %2)))
+            []
+            points
+            )
+        S (reduce
+            #(+ %1 (math/pow %2 2))
+            0
+            E
+            )
 
         result {:a a
                 :b b
-                :out (reduce #(conj %1 (+ (* %2 a) b)) [] out-points)}]
+                :out (reduce #(conj %1 (calc a b %2)) [] out-points)
+                :s S}]
 
     result))

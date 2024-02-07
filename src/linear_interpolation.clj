@@ -1,4 +1,6 @@
-(ns linear-interpolation)
+(ns linear-interpolation
+  (:require [clojure.math :as math])
+  )
 
 ;Name = 'Линейная интерполяция'
 
@@ -44,4 +46,24 @@
 
 (defn execute
   [points out-points]
-  (reduce #(conj %1 (calc-y %2 points)) [] out-points))
+  (let [
+        out (reduce #(conj %1 (calc-y %2 points)) [] out-points)
+        E (reduce
+            #(conj %1 (- (calc-y (first %2) points) (second %2)))
+            []
+            points
+            )
+        S (reduce
+            #(+ %1 (math/pow %2 2))
+            0
+            E
+            )
+
+        result {
+                :out out
+                :s S
+                }
+        ]
+    result
+    )
+  )
