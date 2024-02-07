@@ -44,6 +44,7 @@
                 :b B
                 :out out
                 :s S
+                :name "Power Law Approximation"
                 }]
 
     result))

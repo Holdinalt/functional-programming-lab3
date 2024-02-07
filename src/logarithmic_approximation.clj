@@ -39,6 +39,7 @@
                 :b B
                 :out out
                 :s S
+                :name "Logarithmic Approximation.clj"
                 }]
 
     result))

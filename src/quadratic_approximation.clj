@@ -62,6 +62,7 @@
                       []
                       out-points)
                 :s S
+                :name "Quadratic Approximation"
                 }]
 
     result))

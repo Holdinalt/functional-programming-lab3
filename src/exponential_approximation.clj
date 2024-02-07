@@ -41,6 +41,7 @@
                 :b B
                 :out out
                 :s S
+                :name "Exponential Approximation"
                 }]
 
     result))

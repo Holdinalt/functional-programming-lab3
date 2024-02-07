@@ -3,6 +3,12 @@
         org.clojure/clojure {:mvn/version "1.11.1"}
         org.clojure/test.check {:mvn/version "0.10.0"}
         }
+ :paths ["src"]
  :aliases {:test {:extra-paths ["test"]
                   :extra-deps  {lambdaisland/kaocha {:mvn/version "0.0-529"}}
-                  :main-opts   ["-m" "kaocha.runner"]}}}
+                  :main-opts   ["-m" "kaocha.runner"]}
+           :build {:deps {io.github.clojure/tools.build {:git/tag "v0.1.6" :git/sha "5636e61"}}
+                   :ns-default build}
+           }
+ }
+

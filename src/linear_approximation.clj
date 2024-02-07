@@ -40,6 +40,8 @@
         result {:a a
                 :b b
                 :out (reduce #(conj %1 (calc a b %2)) [] out-points)
-                :s S}]
+                :s S
+                :name "Linear Approximation"
+                }]
 
     result))
