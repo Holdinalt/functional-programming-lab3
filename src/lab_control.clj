@@ -1,28 +1,7 @@
 (ns lab-control
   (:require io-control)
-  (:require linear-interpolation)
-  (:require logarithmic-approximation)
-  (:require linear-approximation)
-  (:require power-law-approximation)
-  (:require quadratic-approximation)
-  (:require exponential-approximation)
+  (:require calc-control)
   (:gen-class))
-
-(defn calcByMethod [method dots out-points]
-  (cond
-    (= method "linearin") (linear-interpolation/execute dots out-points)
-    (= method "linearap") (linear-approximation/execute dots out-points)
-    (= method "log") (logarithmic-approximation/execute dots out-points))
-    (= method "power") (power-law-approximation/execute dots out-points)
-    (= method "qudra") (quadratic-approximation/execute dots out-points)
-    (= method "exp") (exponential-approximation/execute dots out-points)
-  )
-
-(defn calc [dots start end step method]
-  (let [out-points (map #(/ %1 10) (range (* start 10) (* end 10) (* step 10)))
-        result (calcByMethod method dots out-points)]
-
-    (io-control/print-result result out-points)))
 
 (defn find-end [mean now step]
   (cond
@@ -32,7 +11,7 @@
 (defn go [dots window last-count-x step methods]                         ;[] x nil
   (let [str (io-control/readLine)]
     (cond
-      (= str "+D") (doseq [method methods] (lab-control/calc dots last-count-x (+ (first (last dots)) step) step method))
+      (= str "+D") (doseq [method methods] (calc-control/calc dots last-count-x (+ (first (last dots)) step) step method))
       :else (let [added-dots (conj (vec dots) (vec (io-control/parseDots str)))]
               (cond
                 (< (count added-dots) window) (recur
@@ -50,7 +29,7 @@
                             ]
 
                         (doseq [method methods]
-                          (lab-control/calc now-dots last-count-x end step method))
+                          (calc-control/calc now-dots last-count-x end step method))
 
                         (recur now-dots window end step methods)))))))
 
