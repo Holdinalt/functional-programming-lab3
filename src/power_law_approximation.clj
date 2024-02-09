@@ -12,8 +12,7 @@
 ; }
 
 (defn calc [A B X]
-  (* A (math/pow X B))
-  )
+  (* A (math/pow X B)))
 
 (defn execute
   [points out-points]
@@ -30,21 +29,18 @@
              []
              out-points)
         E (reduce
-            #(conj %1 (- (calc A B (first %2)) (second %2)))
-            []
-            points
-            )
+           #(conj %1 (- (calc A B (first %2)) (second %2)))
+           []
+           points)
         S (reduce
-            #(+ %1 (math/pow %2 2))
-            0
-            E
-            )
+           #(+ %1 (math/pow %2 2))
+           0
+           E)
 
         result {:a A
                 :b B
                 :out out
                 :s S
-                :name "Power Law Approximation"
-                }]
+                :name "Power Law Approximation"}]
 
     result))

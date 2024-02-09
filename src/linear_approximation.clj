@@ -11,8 +11,7 @@
 ; }
 
 (defn calc [A B X]
-  (+ (* X A) B)
-  )
+  (+ (* X A) B))
 
 (defn execute
   [points out-points]
@@ -27,21 +26,18 @@
         a (/ D1 D)
         b (/ D2 D)
         E (reduce
-            #(conj %1 (- (calc a b (first %2)) (second %2)))
-            []
-            points
-            )
+           #(conj %1 (- (calc a b (first %2)) (second %2)))
+           []
+           points)
         S (reduce
-            #(+ %1 (math/pow %2 2))
-            0
-            E
-            )
+           #(+ %1 (math/pow %2 2))
+           0
+           E)
 
         result {:a a
                 :b b
                 :out (reduce #(conj %1 (calc a b %2)) [] out-points)
                 :s S
-                :name "Linear Approximation"
-                }]
+                :name "Linear Approximation"}]
 
     result))
