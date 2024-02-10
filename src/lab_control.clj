@@ -26,6 +26,7 @@
                             end (find-end mean last-count-x step)
                             end (if (< end (first (second now-dots))) (first (second now-dots)) end)
                             ;print (println added-dots now-dots mean end)
+                            ;pr (println methods)
                             ]
 
                         (doseq [method methods]
