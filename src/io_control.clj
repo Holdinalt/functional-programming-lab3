@@ -21,6 +21,14 @@
   (doseq [i (range (count out-points))]
     (println (nth out-points i) (nth (:out result) i))))
 
+(defn print-result-new [method out-points dots]
+  (println "Method:" method)
+  (doseq [i (range (count out-points))]
+    (println (nth out-points i) (nth dots i))))
+
 (defn readLine [] (read-line))
 
-(defn parseDots [line] (map read-string (str/split line #" ")))
+(defn parseDots [line] (vec (map read-string (str/split line #" "))))
+
+(defn in
+  ([] (repeatedly read-line)))

@@ -32,7 +32,7 @@
 ### Реализация
 
 - [Обработчик ввода-выхода](./src/io_control.clj)
-- [Основной цикл](./src/lab_control.clj)
+- [Основной цикл](./src/core.clj)
 - [Управление алгоритмами](./src/calc_control.clj)
 - Методы
     - [Линейная интерполяция](./src/linear_interpolation.clj)

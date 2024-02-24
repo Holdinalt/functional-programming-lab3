@@ -13,8 +13,7 @@
 (defn calc [A B X]
   (+ (* X A) B))
 
-(defn execute
-  [points out-points]
+(defn get-vars [points]
   (let [len (count points)
         SX (reduce #(+ (first %2) %1) 0 points)
         SXX (reduce #(+ (math/pow (first %2) 2) %1) 0 points)
@@ -32,12 +31,14 @@
         S (reduce
            #(+ %1 (math/pow %2 2))
            0
-           E)
+           E)]
+    {:a a
+     :b b
+     :S S}))
 
-        result {:a a
-                :b b
-                :out (reduce #(conj %1 (calc a b %2)) [] out-points)
-                :s S
-                :name "Linear Approximation"}]
-
-    result))
+(defn execute
+  [points now step]
+  (let [vars (get-vars points)]
+    (cons
+     (calc (:a vars) (:b vars) now)
+     (lazy-seq (execute points (+ now step) step)))))

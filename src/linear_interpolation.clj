@@ -43,10 +43,9 @@
               out))))
 
 (defn execute
-  [points out-points]
-  (let [out (reduce #(conj %1 (calc-y %2 points)) [] out-points)
-
-        result {:out out
-                :name "Linear Interpolation"}]
-
-    result))
+  ;([points out-points]
+  ; (reduce #(conj %1 (calc-y %2 points)) [] out-points))
+  ([points now step]
+   (cons
+    (calc-y now points)
+    (lazy-seq (execute points (+ now step) step)))))
