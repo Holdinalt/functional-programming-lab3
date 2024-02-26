@@ -35,30 +35,29 @@
                         mean (/ sum window)
                         end (find-end mean start step)
                         end (if (< end (first (second now-dots))) (first (second now-dots)) end)
-                        steps (int (/ (- end start) step))
-                        ]
+                        steps (int (/ (- end start) step))]
                         (doseq [method methods]
                           (->> (take steps (calc-control/getCalc method now-dots start step))
                                (io-control/print-result-new method (range start end step))))
                         (recur now-dots window end step methods)))))))
 
-;(defn execute [args]
-;  (let [trueArgs (first args)
-;        step (read-string (first trueArgs))
-;        window (read-string (second trueArgs))
-;        methods (vec (drop 2 trueArgs))]
-;    (go2 [] window nil step methods)))
-
 (defn execute [args]
   (let [trueArgs (first args)
-        step 0.5
-        window 2
-        methods ["linearin"]]
+        step (read-string (first trueArgs))
+        window (read-string (second trueArgs))
+        methods (vec (drop 2 trueArgs))]
     (go2 [] window nil step methods)))
 
-(execute [])
+;(defn execute [args]
+;  (let [trueArgs (first args)
+;        step 0.5
+;        window 2
+;        methods ["linearin"]]
+;    (go2 [] window nil step methods)))
 
-;(execute [*command-line-args*])
+;(execute [])
+
+(execute [*command-line-args*])
 
 
 
