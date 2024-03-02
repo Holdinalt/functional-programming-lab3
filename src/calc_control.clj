@@ -5,8 +5,7 @@
   ;(:require power-law-approximation)
   ;(:require quadratic-approximation)
   ;(:require exponential-approximation)
-  (:require io-control)
-  )
+  (:require io-control))
 
 (defn get-calc [method dots start step]
   (cond
@@ -19,15 +18,9 @@
     ))
 
 (defn find-end [mean now step]
-  (println mean now step "find-end")
   (cond
     (> now mean) (- now step)
     :else (recur mean (+ now step) step)))
-
-(defn drop-dot-of-needs [dots window]
-  (cond
-    (> (count dots) window) (drop 1 dots)
-    :else dots))
 
 ;{
 ; :start
@@ -36,40 +29,31 @@
 ; }
 (defn get-vars-in-window
   [window-dots last-count window step place]
+  ;(println "get-vars")
   (cond
     (= place "end") (let
-                      [start last-count
-                       end (+ step (first (last window-dots)))
-                       steps (/ (- end last-count) step)
-                       out {
-                            :start start
-                            :end end
-                            :steps steps
-                            }
-                       ]
-                      out
-                      )
-    :else (let [
-                start last-count
+                     [start last-count
+                      end (+ step (first (last window-dots)))
+                      steps (/ (- end last-count) step)
+                      out {:start start
+                           :end end
+                           :steps steps}]
+
+                      out)
+    :else (let [start last-count
                 ;now-dots (drop-dot-of-needs window-dots window)
                 sum (reduce #(+ %1 (first %2)) 0 window-dots)
                 mean (/ sum window)
                 end (find-end mean start step)
-                end (if (< end (first (second window-dots))) (first (second window-dots)) end)
-                steps (int (/ (- end start) step))
-                out {
-                     :start start
-                     :end end
-                     :steps steps
-                     }
-                ]
-            out
-            )
-    )
-  )
+                end-fix (if (< end (first (second window-dots))) (first (second window-dots)) end)
+                steps (int (/ (- end-fix start) step))
+                out {:start start
+                     :end end-fix
+                     :steps steps}]
+
+            out)))
 
 (defn cac-by-methods [dots step methods start end steps]
- (doseq [method methods]
-   (->> (take steps (calc-control/get-calc method dots start step))
-        (io-control/print-result-new method (range start end step))))
- )
+  (doseq [method methods]
+    (->> (take steps (calc-control/get-calc method dots start step))
+         (io-control/print-result-new method (range start end step)))))

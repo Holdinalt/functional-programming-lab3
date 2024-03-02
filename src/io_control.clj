@@ -28,7 +28,7 @@
 
 (defn readLine [] (read-line))
 
-(defn parseDots [line] (vec (map read-string (str/split line #" "))))
+(defn parseDots [line] (vec (map #(->> %1 read-string float) (str/split line #" "))))
 
 (defn in
   ([] (repeatedly read-line)))
