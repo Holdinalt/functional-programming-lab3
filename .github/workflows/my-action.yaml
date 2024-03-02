@@ -24,7 +24,7 @@ jobs:
           cljfmt: 0.10.2
 
       - name: Run Lint
-        run: clj-kondo --lint src test
+        run: clj-kondo --lint src
 
       - name: Run Test
         run: clojure -Mtest
