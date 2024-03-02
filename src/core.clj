@@ -40,34 +40,34 @@
             (calc-control/cac-by-methods new-dots step methods start end steps)
             {:dots new-dots :last-count-x end})))
 
-;(defn execute [args]
-;  (let [trueArgs (first args)
-;        step (read-string (first trueArgs))
-;        window (read-string (second trueArgs))
-;        methods (vec (drop 2 trueArgs))]
-;    (reduce
-;      (fn
-;        [{:keys [dots last-count-x]} new-input]
-;        (core dots window last-count-x step methods new-input))
-;      {:dots [] :last-count-x nil}
-;      (io-control/in))))
-;
-;
-;(execute [*command-line-args*])
-
-(defn execute2 [args]
+(defn execute [args]
   (let [trueArgs (first args)
-        step 0.5
-        window 3
-        methods ["linearap"]]
+        step (read-string (first trueArgs))
+        window (read-string (second trueArgs))
+        methods (vec (drop 2 trueArgs))]
     (reduce
-     (fn
-       [{:keys [dots last-count-x]} new-input]
-       (core dots window last-count-x step methods new-input))
-     {:dots [] :last-count-x nil}
-     (io-control/in))))
+      (fn
+        [{:keys [dots last-count-x]} new-input]
+        (core dots window last-count-x step methods new-input))
+      {:dots [] :last-count-x nil}
+      (io-control/in))))
 
-(execute2 [])
+
+(execute [*command-line-args*])
+
+;(defn execute2 [args]
+;  (let [trueArgs (first args)
+;        step 0.5
+;        window 3
+;        methods ["linearap"]]
+;    (reduce
+;     (fn
+;       [{:keys [dots last-count-x]} new-input]
+;       (core dots window last-count-x step methods new-input))
+;     {:dots [] :last-count-x nil}
+;     (io-control/in))))
+;
+;(execute2 [])
 
 
 
