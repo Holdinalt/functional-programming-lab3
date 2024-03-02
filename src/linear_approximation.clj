@@ -17,10 +17,10 @@
   (let [len (count points)
         ;pr (println points)
         SX (reduce #(+ (first %2) %1) 0 points)
-        SXX (reduce #(+ (math/pow (first %2) 2) %1) 0 points)
+        SXX (reduce #(+ (math/pow (first %2) 2.0) %1) 0 points)
         SY (reduce #(+ (second %2) %1) 0 points)
         SXY (reduce #(+ (* (first %2) (second %2)) %1) 0 points)
-        D (- (* SXX len) (math/pow SX 2))
+        D (- (* SXX len) (math/pow SX 2.0))
         D1 (- (* SXY len) (* SX SY))
         D2 (- (* SXX SY) (* SX SXY))
         a (/ D1 D)
@@ -30,7 +30,7 @@
            []
            points)
         S (reduce
-           #(+ %1 (math/pow %2 2))
+           #(+ %1 (math/pow %2 2.0))
            0
            E)]
     {:a a
