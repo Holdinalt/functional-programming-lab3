@@ -15,6 +15,7 @@
 
 (defn get-vars [points]
   (let [len (count points)
+        ;pr (println points)
         SX (reduce #(+ (first %2) %1) 0 points)
         SXX (reduce #(+ (math/pow (first %2) 2) %1) 0 points)
         SY (reduce #(+ (second %2) %1) 0 points)
