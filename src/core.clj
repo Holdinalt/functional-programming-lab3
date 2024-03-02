@@ -46,12 +46,11 @@
         window (read-string (second trueArgs))
         methods (vec (drop 2 trueArgs))]
     (reduce
-      (fn
-        [{:keys [dots last-count-x]} new-input]
-        (core dots window last-count-x step methods new-input))
-      {:dots [] :last-count-x nil}
-      (io-control/in))))
-
+     (fn
+       [{:keys [dots last-count-x]} new-input]
+       (core dots window last-count-x step methods new-input))
+     {:dots [] :last-count-x nil}
+     (io-control/in))))
 
 (execute [*command-line-args*])
 
