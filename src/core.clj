@@ -32,8 +32,7 @@
             vars (calc-control/get-vars-in-window new-dots last-count-x window step "middle")
             start (:start vars)
             end (:end vars)
-            steps (:steps vars)
-            ]
+            steps (:steps vars)]
             (calc-control/cac-by-methods new-dots step methods start end steps)
             {:dots new-dots :last-count-x end})))
 
