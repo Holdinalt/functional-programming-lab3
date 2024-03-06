@@ -27,7 +27,7 @@
 
 ### Схема
 
-![Дерево процессов](map.jpg)
+![Дерево процессов](exMap.png)
 
 ### Реализация
 
@@ -37,6 +37,10 @@
 - Методы
     - [Линейная интерполяция](./src/linear_interpolation.clj)
     - [Линейная апроксимация](./src/linear_approximation.clj)
+    - [Логорифмическая апроксиация](./src/logarithmic_approximation.clj)
+    - [Квадратическая апроксиация](./src/quadratic_approximation.clj)
+    - [Степенная апроксиация](./src/power_law_approximation.clj)
+    - [Экспоненциальная апроксиация](./src/exponential_approximation.clj)
 
 ### Пример работы
 
