@@ -16,7 +16,6 @@
 
 (defn core
   [dots window last-count-x step methods input-str]
-  ;(println dots window last-count-x step methods input-str "iteration")
   (cond
     (= input-str "+D") (let
                         [vars (calc-control/get-vars-in-window dots last-count-x window step "end")
@@ -27,7 +26,6 @@
                          {:dots dots :last-count-x end})
     (< (inc (count dots)) window) (let
                                    [new-dots (conj (vec dots) (vec (io-control/parseDots input-str)))]
-                              ;(println "add node")
                                     {:dots new-dots :last-count-x (ffirst new-dots)})
     :else (let
            [new-dots (add-dot-from-string dots input-str window)
@@ -35,7 +33,6 @@
             start (:start vars)
             end (:end vars)
             steps (:steps vars)
-            ;pr (println new-dots start end steps "calc")
             ]
             (calc-control/cac-by-methods new-dots step methods start end steps)
             {:dots new-dots :last-count-x end})))
